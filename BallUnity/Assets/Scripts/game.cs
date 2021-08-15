@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public  class game : MonoBehaviour
 {
     public Text Textcoin;
     public int coins;
     
-
+    
     void OnTriggerEnter(Collider otherObj)
     {
-        if(coins >= 5)
+        
+        if (coins >= 5)
         {
             Destroy(gameObject, .0f);
         }   
@@ -23,19 +25,34 @@ public  class game : MonoBehaviour
         }
         if (otherObj.gameObject.tag == "Die" )
         {
-            Destroy(gameObject, .0f);
+            try
+            {
+                
+                Debug.Log("А, это ты!");
+                Destroy(gameObject, .0f);
+
+            }
+            catch
+            {
+                
+                Debug.Log("Ты кто?!");
+
+            }
+            
 
         }
         if (coins == 5)
         {
             var wall = GameObject.FindWithTag("wall");
             Destroy(wall);
+            Debug.Log("Собрал все!");
         }
         if (otherObj.gameObject.tag == "boost")
         {
             var Die = GameObject.FindWithTag("Die");
             Destroy(Die);
-
+            
+            otherObj.gameObject.SetActive(false);
         }
 
     }
